@@ -125,23 +125,98 @@ header {
   transform: rotateY(180deg);
   border: 1px solid #b8860b;
   animation: wave-animation 40s linear infinite;
-  /* Сообщаем браузеру, что фон будет анимироваться */
-  will-change: background-position;
 }
 
-.item-card-back h3 {
-  font-family: "MedievalSharp", cursive;
-  color: #ffd700; /* Ярко-золотой для заголовка */
-  font-size: 2em;
-  text-shadow: 1px 1px 8px rgba(255, 215, 0, 0.5);
+/* --- Стили для новой структуры задней стороны --- */
+
+.back-top {
+  flex-shrink: 0;
+}
+
+/* Удаляем старые стили .back-icon и .stat-rank и заменяем их на .rank-circle */
+.rank-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #b8860b;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.2);
+
+  /* Центрируем букву */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Стили для буквы ранга */
+  font-family: "Metal Mania", cursive;
+  font-size: 3rem;
+  color: #ff4500;
+  text-shadow: 0 0 4px #fff, 0 0 8px #ff4500, 0 0 12px #ff8c00;
+  line-height: 1;
+}
+
+.back-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: 10px 0;
+  width: 100%; /* Добавим для стабильности */
+}
+
+/* --- Стили для списка статов --- */
+.stats-list {
+  width: 85%; /* Делаем контейнер уже, чтобы был отступ от краев */
+  margin: 0 auto; /* Центрируем его */
+  padding: 0;
+}
+
+.stats-list ul {
+  list-style-type: none;
+  padding: 0;
   margin: 0;
 }
 
-.item-card-back p {
+.stats-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
   font-family: "Cormorant Garamond", serif;
+  font-size: 1.1em;
+}
+
+.stats-list li:last-child {
+  border-bottom: none;
+}
+
+.stat-name {
   color: #e0e0e0;
+}
+
+.stat-value {
+  color: #ffd700;
+  font-weight: bold;
   font-size: 1.2em;
-  margin: 15px 0 25px 0;
+}
+
+/* --- Цвета для названий статов --- */
+.stat-name.stat-strength {
+  color: #ff5555; /* Красный */
+}
+
+.stat-name.stat-agility {
+  color: #50fa7b; /* Зеленый */
+}
+
+.stat-name.stat-intellect {
+  color: #55aaff; /* Синий */
+}
+
+.back-bottom {
+  margin-top: auto; /* Автоматически прижимает блок к низу */
+  padding-top: 10px; /* Добавляет отступ сверху */
 }
 
 .item-card-back a {
@@ -178,6 +253,16 @@ header {
   100% {
     background-position: 0% 0%;
   }
+}
+
+/* Стили для ранга силы */
+.stat-rank {
+  font-family: "Metal Mania", cursive;
+  font-size: 5rem; /* Увеличим размер для этого эффектного шрифта */
+  color: #ff4500; /* Огненно-оранжевый цвет */
+  text-shadow: 0 0 5px #fff, 0 0 10px #ff4500, 0 0 15px #ff8c00; /* Создаем эффект огненного свечения */
+  margin-bottom: 15px;
+  line-height: 1;
 }
 
 /* --- КОНЕЦ СТИЛЕЙ ДЛЯ КАРТОЧКИ --- */
