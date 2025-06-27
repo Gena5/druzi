@@ -118,6 +118,14 @@ header {
 
 /* Задняя сторона: "Жидкое золото" */
 .item-card-back {
+  transform: rotateY(180deg);
+  background-color: #282a36;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.item-card-back {
   background-color: #1a0923; /* Очень темный пурпурный */
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3e%3crect fill='%231a0923' width='800' height='800'/%3e%3cg stroke-width='1' fill='none'%3e%3cg stroke='%23daa520' stroke-opacity='0.6'%3e%3cpath d='M 0 100 Q 200 150 400 100 T 800 100' /%3e%3cpath d='M 0 250 Q 150 200 300 250 T 600 250 T 900 250' /%3e%3cpath d='M 800 350 Q 600 400 400 350 T 0 350' /%3e%3cpath d='M 0 500 Q 250 450 500 500 T 1000 500' /%3e%3cpath d='M 800 650 Q 550 700 300 650 T -200 650' /%3e%3cpath d='M 0 750 Q 100 700 200 750 T 400 750 T 600 750 T 800 750' /%3e%3c/g%3e%3cg stroke='%23b8860b' stroke-opacity='0.8'%3e%3cpath d='M 0 50 Q 180 100 380 50 T 780 50' /%3e%3cpath d='M 0 150 Q 160 100 310 150 T 610 150 T 910 150' /%3e%3cpath d='M 800 200 Q 620 250 420 200 T 20 200' /%3e%3cpath d='M 0 450 Q 230 400 480 450 T 980 450' /%3e%3cpath d='M 800 550 Q 570 600 320 550 T -180 550' /%3e%3cpath d='M 0 800 Q 120 750 220 800 T 420 800 T 620 800 T 820 800' /%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
   background-size: 250% 250%;
@@ -130,32 +138,27 @@ header {
 /* --- Стили для новой структуры задней стороны --- */
 
 .back-top {
+  display: flex;
+  align-items: baseline; /* Выравниваем по базовой линии для красивого вида разных шрифтов */
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.3); /* Золотистый разделитель */
+  margin-bottom: 10px;
+}
+
+/* Возвращаем старый стиль для ранга, но в новом месте */
+.rank-circle {
+  /* Убираем стили круга */
+  font-family: "Metal Mania", cursive;
+  font-size: 3.5em; /* Немного уменьшаем, чтобы поместилось */
+  color: #ff4500;
+  text-shadow: 0 0 5px #fff, 0 0 10px #ff4500, 0 0 15px #ff8c00;
+  line-height: 1;
+  margin-right: 15px; /* Оставляем отступ */
   flex-shrink: 0;
 }
 
-/* Удаляем старые стили .back-icon и .stat-rank и заменяем их на .rank-circle */
-.rank-circle {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: 3px solid #b8860b;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-  background-color: rgba(0, 0, 0, 0.2);
-
-  /* Центрируем букву */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* Стили для буквы ранга */
-  font-family: "Metal Mania", cursive;
-  font-size: 3rem;
-  color: #ff4500;
-  text-shadow: 0 0 4px #fff, 0 0 8px #ff4500, 0 0 12px #ff8c00;
-  line-height: 1;
-}
-
 .back-middle {
+  flex-grow: 1; /* Позволяем блоку статов занять все доступное место */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -164,9 +167,20 @@ header {
   width: 100%; /* Добавим для стабильности */
 }
 
+/* Возвращаем старый стиль для имени */
+.back-top h3 {
+  font-family: "MedievalSharp", cursive;
+  font-size: 1.8em;
+  color: #ffffff;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  text-align: left;
+}
+
 /* --- Стили для списка статов --- */
 .stats-list {
-  width: 85%; /* Делаем контейнер уже, чтобы был отступ от краев */
+  text-align: left;
+  width: 100%;
   margin: 0 auto; /* Центрируем его */
   padding: 0;
 }
@@ -212,6 +226,23 @@ header {
 
 .stat-name.stat-intellect {
   color: #55aaff; /* Синий */
+}
+
+.stat-name.stat-stamina {
+  color: #8be9fd; /* Темно-синий (в стиле темы) */
+}
+
+.stat-name.stat-health {
+  color: #f1fa8c; /* Желтый */
+}
+
+.stat-name.stat-hax {
+  /* Градиент от темно-фиолетового к цвету ежевичного мороженого */
+  background: linear-gradient(45deg, #bd93f9, #ff79c6);
+  -webkit-background-clip: text; /* Для совместимости с Chrome/Safari */
+  background-clip: text;
+  color: transparent; /* Делаем сам текст прозрачным, чтобы был виден фон */
+  font-weight: bold; /* Сделаем шрифт жирнее для лучшего вида градиента */
 }
 
 .back-bottom {

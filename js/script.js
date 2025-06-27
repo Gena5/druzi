@@ -20,10 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
       description: "He got bitten by radioactive pug!",
       imageUrl: "img/objects/VOVA1.webp",
       stats: [
-        { name: "Strength", value: "B" },
-        { name: "Agility", value: "A" },
+        { name: "Strength", value: "A+" },
+        { name: "Agility", value: "S" },
         { name: "Intellect", value: "C" },
-        { name: "Potencial", value: "S+" },
+        { name: "Stamina", value: "C" },
+        { name: "Health", value: "C" },
+        { name: "HAX", value: "C" },
       ],
       backLink: "/details/1",
     },
@@ -35,7 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
         { name: "Strength", value: "A+" },
         { name: "Agility", value: "B" },
         { name: "Intellect", value: "C" },
-        { name: "Potencial", value: "A" },
+        { name: "Stamina", value: "C" },
+        { name: "Health", value: "C" },
+        { name: "HAX", value: "C" },
       ],
       backLink: "/details/2",
     },
@@ -47,7 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
         { name: "Strength", value: "A+" },
         { name: "Agility", value: "B" },
         { name: "Intellect", value: "C" },
-        { name: "Potencial", value: "A" },
+        { name: "Stamina", value: "C" },
+        { name: "Health", value: "C" },
+        { name: "HAX", value: "C" },
       ],
       backLink: "/details/3",
     },
@@ -59,7 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
         { name: "Strength", value: "A" },
         { name: "Agility", value: "A" },
         { name: "Intellect", value: "B" },
-        { name: "Potencial", value: "X" },
+        { name: "Stamina", value: "C" },
+        { name: "Health", value: "C" },
+        { name: "HAX", value: "C" },
       ],
       backLink: "/details/4",
     },
@@ -71,7 +79,9 @@ document.addEventListener("DOMContentLoaded", () => {
         { name: "Strength", value: "A" },
         { name: "Agility", value: "A" },
         { name: "Intellect", value: "A" },
-        { name: "Potencial", value: "A" },
+        { name: "Stamina", value: "C" },
+        { name: "Health", value: "C" },
+        { name: "HAX", value: "C" },
       ],
       backLink: "/details/5",
     },
@@ -83,7 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
         { name: "Strength", value: "A+" },
         { name: "Agility", value: "B" },
         { name: "Intellect", value: "S+" },
-        { name: "Potencial", value: "S" },
+        { name: "Stamina", value: "C" },
+        { name: "Health", value: "C" },
+        { name: "HAX", value: "C" },
       ],
       backLink: "/details/6",
     },
@@ -95,7 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
         { name: "Strength", value: "C" },
         { name: "Agility", value: "B" },
         { name: "Intellect", value: "A" },
-        { name: "Potencial", value: "S" },
+        { name: "Stamina", value: "C" },
+        { name: "Health", value: "C" },
+        { name: "HAX", value: "C" },
       ],
       backLink: "/details/7",
     },
@@ -107,7 +121,9 @@ document.addEventListener("DOMContentLoaded", () => {
         { name: "Strength", value: "S+" },
         { name: "Agility", value: "C" },
         { name: "Intellect", value: "F" },
-        { name: "Potencial", value: "S+" },
+        { name: "Stamina", value: "C" },
+        { name: "Health", value: "C" },
+        { name: "HAX", value: "C" },
       ],
       backLink: "/details/8",
     },
@@ -118,8 +134,10 @@ document.addEventListener("DOMContentLoaded", () => {
       stats: [
         { name: "Strength", value: "S" },
         { name: "Agility", value: "S" },
-        { name: "Intellect", value: "S" }, // Улучшено для демонстрации нового ранга
-        { name: "Potencial", value: "S+" },
+        { name: "Intellect", value: "S" },
+        { name: "Stamina", value: "C" },
+        { name: "Health", value: "C" },
+        { name: "HAX", value: "C" },
       ],
       backLink: "/details/9",
     },
@@ -131,7 +149,9 @@ document.addEventListener("DOMContentLoaded", () => {
         { name: "Strength", value: "C" },
         { name: "Agility", value: "B" },
         { name: "Intellect", value: "S" },
-        { name: "Potencial", value: "A+" },
+        { name: "Stamina", value: "C" },
+        { name: "Health", value: "C" },
+        { name: "HAX", value: "C" },
       ],
       backLink: "/details/10",
     },
@@ -143,7 +163,9 @@ document.addEventListener("DOMContentLoaded", () => {
         { name: "Strength", value: "A" },
         { name: "Agility", value: "A+" },
         { name: "Intellect", value: "C" },
-        { name: "Potencial", value: "B" },
+        { name: "Stamina", value: "C" },
+        { name: "Health", value: "C" },
+        { name: "HAX", value: "C" },
       ],
       backLink: "/details/11",
     },
@@ -155,7 +177,9 @@ document.addEventListener("DOMContentLoaded", () => {
         { name: "Strength", value: "F" },
         { name: "Agility", value: "C" },
         { name: "Intellect", value: "A" },
-        { name: "Potencial", value: "F" },
+        { name: "Stamina", value: "C" },
+        { name: "Health", value: "C" },
+        { name: "HAX", value: "C" },
       ],
       backLink: "/details/12",
     },
@@ -172,14 +196,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 2. Присваиваем ранг в зависимости от общей силы
-    // Вы можете легко менять эти пороговые значения для баланса
+    // Пороги увеличены, чтобы соответствовать большему количеству статов
     let calculatedRank = "F";
-    if (totalPower > 90) calculatedRank = "X"; // Условие для нового ранга
-    else if (totalPower > 65) calculatedRank = "S+";
-    else if (totalPower > 60) calculatedRank = "S";
-    else if (totalPower > 55) calculatedRank = "A+";
-    else if (totalPower > 50) calculatedRank = "A";
-    else if (totalPower > 45) calculatedRank = "B";
+    if (totalPower > 110) calculatedRank = "X";
+    else if (totalPower > 90) calculatedRank = "S+";
+    else if (totalPower > 80) calculatedRank = "S";
+    else if (totalPower > 70) calculatedRank = "A+";
+    else if (totalPower > 60) calculatedRank = "A";
+    else if (totalPower > 50) calculatedRank = "B";
     else if (totalPower > 40) calculatedRank = "C";
 
     // 3. Добавляем рассчитанный ранг к объекту
@@ -199,9 +223,9 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="item-card-back">
           <div class="back-top">
             <div class="rank-circle">${item.rank}</div>
+            <h3>${item.title}</h3>
           </div>
           <div class="back-middle">
-            <h3>${item.title}</h3>
             <div class="stats-list">
               <ul>
                 ${item.stats
@@ -216,9 +240,6 @@ document.addEventListener("DOMContentLoaded", () => {
                   .join("")}
               </ul>
             </div>
-          </div>
-          <div class="back-bottom">
-            <a href="${item.backLink}">Подробнее</a>
           </div>
         </div>
       </div>
