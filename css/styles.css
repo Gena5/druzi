@@ -1,0 +1,183 @@
+body {
+  background-color: black;
+}
+
+header {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.main-title {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 5rem;
+  color: #fff;
+  text-transform: uppercase;
+  /* Статичная многослойная тень для эффекта свечения */
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ffae42, 0 0 40px #ffae42,
+    0 0 60px #ffae42, 0 0 80px #ffae42;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+}
+
+.objects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px; /* Увеличим расстояние для лучшего вида свечения */
+  padding: 40px;
+  justify-content: center;
+}
+
+/* --- НАЧАЛО СТИЛЕЙ ДЛЯ КАРТОЧКИ --- */
+
+/* Убираем старые стили .item-card, .item-card:hover, .item-card h3, .item-card p */
+
+.item-card {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  perspective: 1500px;
+  width: 300px;
+  height: 400px;
+}
+
+/* Внутренний контейнер, который будет вращаться и иметь тень */
+.item-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  /* Сообщаем браузеру, что это свойство будет меняться */
+  will-change: transform;
+  border-radius: 15px;
+  /* Статичная тень для эффекта свечения */
+  box-shadow: 0 0 15px rgba(255, 174, 66, 0.5), 0 0 30px rgba(255, 140, 0, 0.5),
+    inset 0 0 20px rgba(255, 140, 0, 0.4);
+}
+
+/* Общие стили для обеих сторон */
+.item-card-front,
+.item-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  box-sizing: border-box;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Передняя сторона: "Королевский пурпур" */
+.item-card-front {
+  background: linear-gradient(145deg, #4a148c, #2c0b50);
+  color: #f0f0f0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.item-card-front img {
+  max-height: 55%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.item-card-front h3 {
+  font-family: "MedievalSharp", cursive;
+  color: #ffffff;
+  font-size: 2em;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  margin: 0;
+}
+
+.item-card-front p {
+  font-family: "Cormorant Garamond", serif;
+  color: #d1c4e9; /* Светло-лиловый для описания */
+  font-size: 1.1em;
+  font-style: italic;
+  margin: 8px 0 0 0;
+}
+
+/* Задняя сторона: "Жидкое золото" */
+.item-card-back {
+  background-color: #1a0923; /* Очень темный пурпурный */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3e%3crect fill='%231a0923' width='800' height='800'/%3e%3cg stroke-width='1' fill='none'%3e%3cg stroke='%23daa520' stroke-opacity='0.6'%3e%3cpath d='M 0 100 Q 200 150 400 100 T 800 100' /%3e%3cpath d='M 0 250 Q 150 200 300 250 T 600 250 T 900 250' /%3e%3cpath d='M 800 350 Q 600 400 400 350 T 0 350' /%3e%3cpath d='M 0 500 Q 250 450 500 500 T 1000 500' /%3e%3cpath d='M 800 650 Q 550 700 300 650 T -200 650' /%3e%3cpath d='M 0 750 Q 100 700 200 750 T 400 750 T 600 750 T 800 750' /%3e%3c/g%3e%3cg stroke='%23b8860b' stroke-opacity='0.8'%3e%3cpath d='M 0 50 Q 180 100 380 50 T 780 50' /%3e%3cpath d='M 0 150 Q 160 100 310 150 T 610 150 T 910 150' /%3e%3cpath d='M 800 200 Q 620 250 420 200 T 20 200' /%3e%3cpath d='M 0 450 Q 230 400 480 450 T 980 450' /%3e%3cpath d='M 800 550 Q 570 600 320 550 T -180 550' /%3e%3cpath d='M 0 800 Q 120 750 220 800 T 420 800 T 620 800 T 820 800' /%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+  background-size: 250% 250%;
+  color: #f0f0f0;
+  transform: rotateY(180deg);
+  border: 1px solid #b8860b;
+  animation: wave-animation 40s linear infinite;
+  /* Сообщаем браузеру, что фон будет анимироваться */
+  will-change: background-position;
+}
+
+.item-card-back h3 {
+  font-family: "MedievalSharp", cursive;
+  color: #ffd700; /* Ярко-золотой для заголовка */
+  font-size: 2em;
+  text-shadow: 1px 1px 8px rgba(255, 215, 0, 0.5);
+  margin: 0;
+}
+
+.item-card-back p {
+  font-family: "Cormorant Garamond", serif;
+  color: #e0e0e0;
+  font-size: 1.2em;
+  margin: 15px 0 25px 0;
+}
+
+.item-card-back a {
+  text-decoration: none;
+  color: #1a0923;
+  background-color: #ffd700;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.item-card-back a:hover {
+  background-color: #fff;
+  color: #b8860b;
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Класс для переворота */
+.item-card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* Анимация для фона задней стороны */
+@keyframes wave-animation {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* --- КОНЕЦ СТИЛЕЙ ДЛЯ КАРТОЧКИ --- */
