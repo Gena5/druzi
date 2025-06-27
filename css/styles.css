@@ -1,3 +1,4 @@
+/* --- ГЛОБАЛЬНЫЕ СТИЛИ И ШРИФТЫ --- */
 body {
   background-color: black;
 }
@@ -12,36 +13,50 @@ header {
   font-size: 5rem;
   color: #fff;
   text-transform: uppercase;
-  /* Статичная многослойная тень для эффекта свечения */
   text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ffae42, 0 0 40px #ffae42,
     0 0 60px #ffae42, 0 0 80px #ffae42;
+  transition: all 0.5s ease-in-out; /* Добавляем плавный переход цвета */
 }
 
-/* Адаптивность для мобильных устройств */
-@media (max-width: 768px) {
-  .main-title {
-    font-size: 3.5rem;
-  }
+/* Стиль заголовка в пробужденном режиме */
+body.is-awakened .main-title {
+  color: #f8f8f2;
+  text-shadow: 0 0 5px #fff, 0 0 15px #ff79c6, 0 0 30px #ff79c6,
+    0 0 50px #bd93f9, 0 0 80px #bd93f9;
 }
 
-@media (max-width: 480px) {
-  .main-title {
-    font-size: 2.5rem;
-    line-height: 1.2;
-  }
+/* Стиль для подзаголовка */
+.subtitle {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 2rem;
+  text-transform: uppercase;
+  margin-top: -15px; /* Придвигаем ближе к заголовку */
+  color: #f8f8f2;
+  text-shadow: 0 0 5px #fff, 0 0 15px #ff79c6, 0 0 30px #ff79c6,
+    0 0 50px #bd93f9, 0 0 80px #bd93f9;
+
+  /* Скрываем по умолчанию */
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.5s ease-in-out;
 }
 
+/* Показываем подзаголовок в пробужденном режиме */
+body.is-awakened .subtitle {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- КОНТЕЙНЕР ДЛЯ КАРТ --- */
 .objects {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px; /* Увеличим расстояние для лучшего вида свечения */
+  gap: 40px;
   padding: 40px;
   justify-content: center;
 }
 
-/* --- НАЧАЛО СТИЛЕЙ ДЛЯ КАРТОЧКИ --- */
-
-/* Убираем старые стили .item-card, .item-card:hover, .item-card h3, .item-card p */
+/* --- СТИЛИ КАРТОЧКИ: ОСНОВА --- */
 
 .item-card {
   background-color: transparent;
@@ -52,25 +67,28 @@ header {
   height: 400px;
 }
 
-/* Внутренний контейнер, который будет вращаться и иметь тень */
 .item-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
+  text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
-  /* Сообщаем браузеру, что это свойство будет меняться */
   will-change: transform;
   border-radius: 15px;
-  /* Статичная тень для эффекта свечения */
   box-shadow: 0 0 15px rgba(255, 174, 66, 0.5), 0 0 30px rgba(255, 140, 0, 0.5),
     inset 0 0 20px rgba(255, 140, 0, 0.4);
 }
 
-/* Общие стили для обеих сторон */
+.item-card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* --- ОБЩИЕ СТИЛИ ДЛЯ ОБЕИХ СТОРОН КАРТЫ --- */
 .item-card-front,
 .item-card-back {
-  position: absolute;
+  position: absolute; /* ИСПРАВЛЕНО: Было position: relative только у front */
+  overflow: hidden; /* ИСПРАВЛЕНО: Скрываем все, что выходит за рамки */
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden;
@@ -83,9 +101,10 @@ header {
   justify-content: center;
   align-items: center;
   text-align: center;
+  z-index: 2;
 }
 
-/* Передняя сторона: "Королевский пурпур" */
+/* --- СТИЛИ ПЕРЕДНЕЙ СТОРОНЫ --- */
 .item-card-front {
   background: linear-gradient(145deg, #4a148c, #2c0b50);
   color: #f0f0f0;
@@ -110,64 +129,43 @@ header {
 
 .item-card-front p {
   font-family: "Cormorant Garamond", serif;
-  color: #d1c4e9; /* Светло-лиловый для описания */
+  color: #d1c4e9;
   font-size: 1.1em;
   font-style: italic;
   margin: 8px 0 0 0;
 }
 
-/* Задняя сторона: "Жидкое золото" */
+/* --- СТИЛИ ЗАДНЕЙ СТОРОНЫ --- */
 .item-card-back {
   transform: rotateY(180deg);
-  background-color: #282a36;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-}
-
-.item-card-back {
-  background-color: #1a0923; /* Очень темный пурпурный */
+  padding: 15px; /* Уточнено */
+  background-color: #1a0923;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3e%3crect fill='%231a0923' width='800' height='800'/%3e%3cg stroke-width='1' fill='none'%3e%3cg stroke='%23daa520' stroke-opacity='0.6'%3e%3cpath d='M 0 100 Q 200 150 400 100 T 800 100' /%3e%3cpath d='M 0 250 Q 150 200 300 250 T 600 250 T 900 250' /%3e%3cpath d='M 800 350 Q 600 400 400 350 T 0 350' /%3e%3cpath d='M 0 500 Q 250 450 500 500 T 1000 500' /%3e%3cpath d='M 800 650 Q 550 700 300 650 T -200 650' /%3e%3cpath d='M 0 750 Q 100 700 200 750 T 400 750 T 600 750 T 800 750' /%3e%3c/g%3e%3cg stroke='%23b8860b' stroke-opacity='0.8'%3e%3cpath d='M 0 50 Q 180 100 380 50 T 780 50' /%3e%3cpath d='M 0 150 Q 160 100 310 150 T 610 150 T 910 150' /%3e%3cpath d='M 800 200 Q 620 250 420 200 T 20 200' /%3e%3cpath d='M 0 450 Q 230 400 480 450 T 980 450' /%3e%3cpath d='M 800 550 Q 570 600 320 550 T -180 550' /%3e%3cpath d='M 0 800 Q 120 750 220 800 T 420 800 T 620 800 T 820 800' /%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
   background-size: 250% 250%;
   color: #f0f0f0;
-  transform: rotateY(180deg);
   border: 1px solid #b8860b;
   animation: wave-animation 40s linear infinite;
 }
 
-/* --- Стили для новой структуры задней стороны --- */
-
 .back-top {
   display: flex;
-  align-items: baseline; /* Выравниваем по базовой линии для красивого вида разных шрифтов */
+  align-items: baseline;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 215, 0, 0.3); /* Золотистый разделитель */
+  border-bottom: 1px solid rgba(255, 215, 0, 0.3);
   margin-bottom: 10px;
+  width: 100%;
 }
 
-/* Возвращаем старый стиль для ранга, но в новом месте */
 .rank-circle {
-  /* Убираем стили круга */
   font-family: "Metal Mania", cursive;
-  font-size: 3.5em; /* Немного уменьшаем, чтобы поместилось */
+  font-size: 3.5em;
   color: #ff4500;
   text-shadow: 0 0 5px #fff, 0 0 10px #ff4500, 0 0 15px #ff8c00;
   line-height: 1;
-  margin-right: 15px; /* Оставляем отступ */
+  margin-right: 15px;
   flex-shrink: 0;
 }
 
-.back-middle {
-  flex-grow: 1; /* Позволяем блоку статов занять все доступное место */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  padding: 10px 0;
-  width: 100%; /* Добавим для стабильности */
-}
-
-/* Возвращаем старый стиль для имени */
 .back-top h3 {
   font-family: "MedievalSharp", cursive;
   font-size: 1.8em;
@@ -177,12 +175,12 @@ header {
   text-align: left;
 }
 
-/* --- Стили для списка статов --- */
-.stats-list {
-  text-align: left;
+.back-middle {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
-  margin: 0 auto; /* Центрируем его */
-  padding: 0;
 }
 
 .stats-list ul {
@@ -208,72 +206,138 @@ header {
 .stat-name {
   color: #e0e0e0;
 }
-
 .stat-value {
   color: #ffd700;
   font-weight: bold;
   font-size: 1.2em;
 }
-
-/* --- Цвета для названий статов --- */
 .stat-name.stat-strength {
-  color: #ff5555; /* Красный */
+  color: #ff5555;
 }
-
 .stat-name.stat-agility {
-  color: #50fa7b; /* Зеленый */
+  color: #50fa7b;
 }
-
 .stat-name.stat-intellect {
-  color: #55aaff; /* Синий */
+  color: #55aaff;
 }
-
 .stat-name.stat-stamina {
-  color: #8be9fd; /* Темно-синий (в стиле темы) */
+  color: #8be9fd;
 }
-
 .stat-name.stat-health {
-  color: #f1fa8c; /* Желтый */
+  color: #f1fa8c;
 }
-
 .stat-name.stat-hax {
-  /* Градиент от темно-фиолетового к цвету ежевичного мороженого */
   background: linear-gradient(45deg, #bd93f9, #ff79c6);
-  -webkit-background-clip: text; /* Для совместимости с Chrome/Safari */
+  -webkit-background-clip: text;
   background-clip: text;
-  color: transparent; /* Делаем сам текст прозрачным, чтобы был виден фон */
-  font-weight: bold; /* Сделаем шрифт жирнее для лучшего вида градиента */
-}
-
-.back-bottom {
-  margin-top: auto; /* Автоматически прижимает блок к низу */
-  padding-top: 10px; /* Добавляет отступ сверху */
-}
-
-.item-card-back a {
-  text-decoration: none;
-  color: #1a0923;
-  background-color: #ffd700;
-  padding: 12px 24px;
-  border-radius: 50px;
+  color: transparent;
   font-weight: bold;
+}
+
+/* --- КНОПКА УПРАВЛЕНИЯ --- */
+.controls-container {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.awake-btn {
+  font-family: "Metal Mania", cursive;
+  font-size: 2em;
+  padding: 15px 40px;
+  color: #f8f8f2;
+  background-color: #6272a4;
+  border: 2px solid #bd93f9;
+  border-radius: 10px;
+  cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  text-shadow: 0 0 5px #ff79c6;
 }
 
-.item-card-back a:hover {
-  background-color: #fff;
-  color: #b8860b;
-  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.5);
-  transform: translateY(-2px);
+.awake-btn:hover {
+  background-color: #bd93f9;
+  color: #1a0923;
+  box-shadow: 0 0 20px #bd93f9;
 }
 
-/* Класс для переворота */
-.item-card-inner.is-flipped {
-  transform: rotateY(180deg);
+/* --- ЭФФЕКТЫ ПРОБУЖДЕННЫХ КАРТ --- */
+
+.is-awakened .item-card-inner {
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Анимация для фона задней стороны */
+.is-awakened .item-card-inner::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  z-index: 1;
+  background: linear-gradient(45deg, #ff79c6, #bd93f9, #ff4500);
+  border-radius: 18px;
+  filter: blur(12px);
+  opacity: 0.75;
+  transition: opacity 0.5s;
+}
+
+/* Псевдо-элемент для анимации вспышки */
+.item-card-inner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 15px;
+  z-index: 10; /* Выше всего остального контента */
+  opacity: 0; /* Изначально невидим */
+  pointer-events: none; /* Не мешает кликам */
+}
+
+/* --- ЭФФЕКТ ЧАСТИЦ НА ПЕРЕДНЕЙ СТОРОНЕ --- */
+.is-awakened .item-card-front::before,
+.is-awakened .item-card-front::after {
+  content: "";
+  position: absolute;
+  top: -150%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+
+.is-awakened .item-card-front::before {
+  background: radial-gradient(
+    circle,
+    rgba(255, 121, 198, 0.4) 0%,
+    rgba(255, 121, 198, 0) 60%
+  );
+  animation: float-particles 15s infinite linear;
+}
+
+.is-awakened .item-card-front::after {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(189, 147, 249, 0.3) 0%,
+    rgba(189, 147, 249, 0) 60%
+  );
+  animation: float-particles 20s infinite linear;
+  animation-delay: -5s;
+}
+
+.is-awakened .item-card-front::before,
+.is-awakened .item-card-front::after {
+  opacity: 1;
+}
+
+/* --- АНИМАЦИИ --- */
 @keyframes wave-animation {
   0% {
     background-position: 0% 0%;
@@ -286,14 +350,81 @@ header {
   }
 }
 
-/* Стили для ранга силы */
-.stat-rank {
-  font-family: "Metal Mania", cursive;
-  font-size: 5rem; /* Увеличим размер для этого эффектного шрифта */
-  color: #ff4500; /* Огненно-оранжевый цвет */
-  text-shadow: 0 0 5px #fff, 0 0 10px #ff4500, 0 0 15px #ff8c00; /* Создаем эффект огненного свечения */
-  margin-bottom: 15px;
-  line-height: 1;
+@keyframes float-particles {
+  0% {
+    transform: translate(-50%, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, 350%) rotate(360deg);
+  }
 }
 
-/* --- КОНЕЦ СТИЛЕЙ ДЛЯ КАРТОЧКИ --- */
+/* --- СТИЛИ И АНИМАЦИИ ПЕРЕХОДА --- */
+
+#transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  opacity: 0;
+  z-index: 9999; /* Выше всех элементов */
+  pointer-events: none; /* Не мешает кликам */
+}
+
+/* Класс-триггер для запуска анимации */
+#transition-overlay.is-flashing {
+  animation: screen-flash 2s ease-in-out;
+}
+
+.is-transitioning .item-card-inner {
+  animation: shake-animation 2s ease-in-out;
+}
+
+/* Анимация яростной тряски, которая останавливается на полпути */
+@keyframes shake-animation {
+  /* Фаза тряски (первая половина анимации) */
+  0% {
+    transform: translateX(0);
+  }
+  10%,
+  30% {
+    transform: translateX(-8px) rotate(-2deg);
+  }
+  20%,
+  40% {
+    transform: translateX(8px) rotate(2deg);
+  }
+
+  /* Фаза покоя (вторая половина анимации) */
+  50%,
+  100% {
+    transform: translateX(0) rotate(0);
+  }
+}
+
+/* Анимация вспышки для оверлея */
+@keyframes screen-flash {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* --- АДАПТИВНОСТЬ --- */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+}
