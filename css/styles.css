@@ -72,7 +72,7 @@ body.is-awakened .subtitle {
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.8s;
+  transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
   transform-style: preserve-3d;
   will-change: transform;
   border-radius: 15px;
@@ -259,6 +259,37 @@ body.is-awakened .subtitle {
   box-shadow: 0 0 20px #bd93f9;
 }
 
+/* --- СТИЛИ КНОПКИ НА ЗАДНЕЙ СТОРОНЕ --- */
+.view-more-btn {
+  font-family: "MedievalSharp", cursive;
+  color: #ffd700; /* Ярко-желтый */
+  font-size: 1.2em;
+  background: transparent;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  opacity: 1; /* ИЗМЕНЕНО с 0 на 1 - показываем всегда */
+  text-shadow: 0 0 3px rgba(255, 215, 0, 0.3); /* Базовое свечение */
+}
+
+/* Эффекты при наведении - усиленное свечение */
+.view-more-btn:hover {
+  color: #ffea00; /* Более яркий желтый */
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.5),
+    0 0 15px rgba(255, 215, 0, 0.5);
+  background: transparent;
+  transform: scale(1.05);
+  border-color: rgba(255, 215, 0, 0.6);
+}
+
+/* Эффект при клике */
+.view-more-btn:active {
+  transform: scale(0.95);
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+}
+
 /* --- ЭФФЕКТЫ ПРОБУЖДЕННЫХ КАРТ --- */
 
 .is-awakened .item-card-inner {
@@ -296,20 +327,7 @@ body.is-awakened .subtitle {
   pointer-events: none; /* Не мешает кликам */
 }
 
-/* --- ЭФФЕКТ ЧАСТИЦ НА ПЕРЕДНЕЙ СТОРОНЕ --- */
-.is-awakened .item-card-front::before,
-.is-awakened .item-card-front::after {
-  content: "";
-  position: absolute;
-  top: -150%;
-  left: 50%;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 1s ease-in;
-}
+
 
 .is-awakened .item-card-front::before {
   background: radial-gradient(
@@ -337,6 +355,37 @@ body.is-awakened .subtitle {
   opacity: 1;
 }
 
+.is-awakened .item-card:hover .item-card-front h3 {
+  transform: translateY(-3px);
+  text-shadow: 0 0 10px rgba(255, 121, 198, 0.7),
+    0 0 20px rgba(255, 121, 198, 0.4);
+}
+
+.is-awakened .item-card:hover .item-card-front p {
+  transform: translateY(-2px);
+  text-shadow: 0 0 8px rgba(189, 147, 249, 0.7);
+}
+
+/* Дополнительный свечение по краям */
+.is-awakened .item-card-front::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  box-shadow: inset 0 0 20px rgba(189, 147, 249, 0.5);
+  opacity: 0.5;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.is-awakened .item-card:hover .item-card-front::after {
+  opacity: 0.8;
+}
+
 /* --- АНИМАЦИИ --- */
 @keyframes wave-animation {
   0% {
@@ -350,14 +399,7 @@ body.is-awakened .subtitle {
   }
 }
 
-@keyframes float-particles {
-  0% {
-    transform: translate(-50%, 0) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, 350%) rotate(360deg);
-  }
-}
+
 
 /* --- СТИЛИ И АНИМАЦИИ ПЕРЕХОДА --- */
 
@@ -375,7 +417,7 @@ body.is-awakened .subtitle {
 
 /* Класс-триггер для запуска анимации */
 #transition-overlay.is-flashing {
-  animation: screen-flash 2s ease-in-out;
+  animation: screen-flash 4s ease-in-out !important; /* УВЕЛИЧЕНО до 4с */
 }
 
 .is-transitioning .item-card-inner {
@@ -404,27 +446,278 @@ body.is-awakened .subtitle {
   }
 }
 
-/* Анимация вспышки для оверлея */
+/* Улучшенная анимация вспышки для оверлея */
 @keyframes screen-flash {
-  0%,
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  20% {
+    opacity: 1; /* Быстрее достигаем полной белизны */
+  }
+  60% {
+    opacity: 0.8; /* ОЧЕНЬ долго держим белый экран */
+  }
+  80% {
+    opacity: 0.7; /* Медленное затухание */
+  }
+  90% {
+    opacity: 0.3;
+  }
+  95% {
+    opacity: 0.2;
+  }
+  98% {
+    opacity: 0.1;
+  }
   100% {
     opacity: 0;
   }
+}
+
+/* --- МОДАЛЬНОЕ ОКНО --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  position: relative;
+  background: linear-gradient(145deg, #1a0923, #2c0b50);
+  width: 80%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 15px;
+  border: 2px solid #bd93f9;
+  box-shadow: 0 0 30px rgba(189, 147, 249, 0.7),
+    0 0 60px rgba(255, 121, 198, 0.4);
+  padding: 30px;
+  color: #f8f8f2;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #bd93f9;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.modal-close:hover {
+  color: #ff79c6;
+  transform: scale(1.2);
+}
+
+.modal-header {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.modal-header img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #bd93f9;
+  box-shadow: 0 0 15px rgba(189, 147, 249, 0.5);
+}
+
+.modal-title-section {
+  flex: 1;
+}
+
+.modal-title-section h2 {
+  font-family: "Metal Mania", cursive;
+  font-size: 2.5em;
+  margin: 0 0 10px 0;
+  color: #ff79c6;
+  text-shadow: 0 0 10px rgba(255, 121, 198, 0.5);
+}
+
+.modal-title-section p {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.2em;
+  font-style: italic;
+  margin: 0;
+  color: #f1fa8c;
+}
+
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.modal-stats h3,
+.modal-lore h3 {
+  font-family: "MedievalSharp", cursive;
+  color: #bd93f9;
+  margin-top: 0;
+  border-bottom: 1px solid rgba(189, 147, 249, 0.3);
+  padding-bottom: 10px;
+}
+
+.modal-stats ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-stats li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(189, 147, 249, 0.2);
+}
+
+.modal-lore p {
+  font-family: "Cormorant Garamond", serif;
+  color: #e0e0e0;
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- АНИМАЦИЯ ПОДЪЕМА ЭКРАНА --- */
+/* Гораздо более выраженный подъем */
+body.is-awakening header {
+  animation: header-rise 1.8s cubic-bezier(0.15, 0.85, 0.36, 1) !important;
+  animation-fill-mode: both !important;
+  transform-origin: center bottom !important;
+  will-change: transform !important;
+}
+
+body.is-awakening .objects {
+  animation: objects-rise 1.8s cubic-bezier(0.15, 0.85, 0.36, 1) !important;
+  animation-fill-mode: both !important;
+  transform-origin: center bottom !important;
+  will-change: transform !important;
+}
+
+@keyframes header-rise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  5% {
+    transform: translate3d(0, -10px, 0) scale(1.01);
+  } /* Начальный рывок */
+  35% {
+    transform: translate3d(0, -120px, 0) scale(1.08);
+  } /* ЭКСТРЕМАЛЬНО УСИЛЕНО */
+  65% {
+    transform: translate3d(0, -60px, 0) scale(1.04);
+  }
+  85% {
+    transform: translate3d(0, -20px, 0) scale(1.01);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes objects-rise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  5% {
+    transform: translate3d(0, -8px, 0) scale(1.01);
+  } /* Начальный рывок */
+  35% {
+    transform: translate3d(0, -100px, 0) scale(1.06);
+  } /* ЭКСТРЕМАЛЬНО УСИЛЕНО */
+  65% {
+    transform: translate3d(0, -50px, 0) scale(1.03);
+  }
+  85% {
+    transform: translate3d(0, -15px, 0) scale(1.01);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* --- УЛУЧШЕННЫЙ ПОДЪЕМ ЭКРАНА --- */
+.screen-rising {
+  transition: transform 0ms linear !important; /* Отключаем плавность для начала */
+}
+
+@keyframes extreme-rise {
+  0% {
+    transform: translateY(0);
+  }
+  15% {
+    transform: translateY(-150px);
+  } /* Резкий подъем вверх */
+  30% {
+    transform: translateY(-200px);
+  } /* Пик подъема */
   50% {
-    opacity: 1;
-  }
+    transform: translateY(-150px);
+  } /* Небольшое падение */
+  70% {
+    transform: translateY(-100px);
+  } /* Продолжение падения */
+  85% {
+    transform: translateY(-50px);
+  } /* Медленное возвращение */
+  100% {
+    transform: translateY(0);
+  } /* Полное возвращение */
 }
 
-/* --- АДАПТИВНОСТЬ --- */
-@media (max-width: 768px) {
-  .main-title {
-    font-size: 3.5rem;
-  }
+/* --- ИСПРАВЛЕНИЕ ГОРИЗОНТАЛЬНОГО СКРОЛЛА --- */
+html,
+body {
+  overflow-x: hidden !important;
+  max-width: 100vw;
 }
 
-@media (max-width: 480px) {
-  .main-title {
-    font-size: 2.5rem;
-    line-height: 1.2;
-  }
+/* Предотвращаем скролл во время анимации */
+body.is-awakening {
+  overflow: hidden !important;
+}
+
+/* --- МЕДЛЕННЫЙ ПЕРЕВОРОТ ПРИ AWAKE --- */
+/* Медленный и плавный переворот карт при AWAKE */
+.slow-flip-back {
+  transition: transform 4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transform-origin: center center !important;
+  will-change: transform !important;
+  animation: none !important; /* Отключаем другие анимации */
+}
+
+/* Обычный переворот карт при клике */
+.item-card-inner {
+  transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Важно: отключаем тряску для медленно переворачивающихся карт */
+.is-transitioning .item-card-inner.slow-flip-back {
+  animation: none !important;
 }

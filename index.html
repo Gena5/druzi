@@ -3,38 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DRUZI</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>THE DRUZI - Awakening</title>
+
+    <!-- Шрифты -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=MedievalSharp&display=swap"
+      href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap"
       rel="stylesheet"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
+    <!-- Оверлей для анимации перехода -->
     <div id="transition-overlay"></div>
+
+    <div id="character-modal" class="modal-overlay">
+      <div class="modal-content">
+        <!-- Содержимое модального окна будет генерироваться динамически -->
+      </div>
+    </div>
+
     <header>
       <h1 class="main-title">THE DRUZI</h1>
       <p class="subtitle">Awoken</p>
     </header>
 
-    <div class="objects">
-      <!-- Карточки будут генерироваться здесь -->
-    </div>
+    <div class="objects"></div>
 
     <div class="controls-container">
       <button id="awake-button" class="awake-btn">AWAKE</button>
     </div>
-    <footer></footer>
+
     <script src="js/script.js"></script>
   </body>
 </html>
