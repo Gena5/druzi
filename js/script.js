@@ -78,16 +78,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- СЛОВАРИ И ДАННЫЕ ---
 
   const statValueMapping = {
-    X: 30,
-    "S+": 20,
-    S: 18,
-    "A+": 16,
-    A: 14,
-    "B+": 13,
-    B: 12,
-    "C+": 11,
-    C: 10,
-    F: 5,
+    "Z+": 85, // Increased
+    Z: 75, // Increased
+    "X+": 65, // Unchanged
+    X: 55, // Reduced
+    SSS: 45, // Unchanged
+    "SS+": 38, // Adjusted
+    SS: 32, // Adjusted
+    "S+": 27, // Adjusted
+    S: 22, // Reduced
+    "A+": 18, // Reduced
+    A: 15, // Reduced
+    "B+": 12, // Reduced
+    B: 10, // Reduced
+    "C+": 8, // Reduced
+    C: 6, // Reduced
+    F: 3, // Reduced
   };
 
   // ОБЫЧНЫЕ ДАННЫЕ
@@ -254,105 +260,105 @@ document.addEventListener("DOMContentLoaded", () => {
   const awokenItemsData = [
     {
       title: 'AWOKEN: <br> "PUG MAN"',
-      description: "The pug essence is now fully unleashed!",
-      imageUrl: "img/objects/VOVA1_awoken.webp", // ПРЕДПОЛАГАЕТСЯ НОВОЕ ИЗОБРАЖЕНИЕ
+      description: "Even hell can`t hendle him.",
+      imageUrl: "img/awk/pugman.jpg", // ПРЕДПОЛАГАЕТСЯ НОВОЕ ИЗОБРАЖЕНИЕ
       stats: [
-        { name: "Strength", value: "S+" },
+        { name: "Strength", value: "S" },
         { name: "Agility", value: "S" },
-        { name: "Intellect", value: "A+" },
-        { name: "Stamina", value: "A" },
+        { name: "Intellect", value: "S" },
+        { name: "Stamina", value: "X" },
         { name: "Health", value: "S" },
-        { name: "HAX", value: "A+" },
+        { name: "HAX", value: "X" },
       ],
     },
     {
-      title: 'AWOKEN: "LISTENER"',
+      title: 'AWOKEN: <br> "LISTENER"',
       description: "The listener's senses are heightened!",
       imageUrl: "img/awk/meh.jpg",
       stats: [
-        { name: "Strength", value: "B+" },
-        { name: "Agility", value: "S+" },
-        { name: "Intellect", value: "A" },
+        { name: "Strength", value: "S" },
+        { name: "Agility", value: "X" },
+        { name: "Intellect", value: "X" },
         { name: "Stamina", value: "S" },
-        { name: "Health", value: "C" },
-        { name: "HAX", value: "A+" },
+        { name: "Health", value: "S" },
+        { name: "HAX", value: "S" },
       ],
     },
     {
       title: 'AWOKEN: <br> "CAVE MAN"',
       description: "The primal power is overwhelming!",
-      imageUrl: "img/objects/KIRIL1_awoken.webp",
+      imageUrl: "img/awk/kiril.jpg",
       stats: [
-        { name: "Strength", value: "S" },
-        { name: "Agility", value: "B" },
+        { name: "Strength", value: "SSS" },
+        { name: "Agility", value: "SSS" },
         { name: "Intellect", value: "B" },
-        { name: "Stamina", value: "C" },
-        { name: "Health", value: "F" },
+        { name: "Stamina", value: "SSS" },
+        { name: "Health", value: "S" },
         { name: "HAX", value: "S+" },
       ],
     },
     {
-      title: 'AWOKEN: "LEGION"',
+      title: 'AWOKEN: <br> "LEGION"',
       description: "The warrior's spirit is unyielding!",
-      imageUrl: "img/objects/DENIS1_awoken.webp",
+      imageUrl: "img/awk/DENIS.jpg",
       stats: [
-        { name: "Strength", value: "S+" },
-        { name: "Agility", value: "S" },
-        { name: "Intellect", value: "A+" },
-        { name: "Stamina", value: "A" },
-        { name: "Health", value: "B+" },
-        { name: "HAX", value: "C" },
+        { name: "Strength", value: "Z+" },
+        { name: "Agility", value: "X" },
+        { name: "Intellect", value: "S" },
+        { name: "Stamina", value: "X" },
+        { name: "Health", value: "S" },
+        { name: "HAX", value: "A+" },
       ],
     },
     {
-      title: 'AWOKEN: "MR.A"',
+      title: 'AWOKEN: <br> "MR.A"',
       description: "The ultimate form of vigilance and power.",
-      imageUrl: "img/objects/ALADIN1_awoken.webp",
+      imageUrl: "img/awk/aladin.jpg",
       stats: [
-        { name: "Strength", value: "B+" },
-        { name: "Agility", value: "C" },
-        { name: "Intellect", value: "S+" },
-        { name: "Stamina", value: "F" },
-        { name: "Health", value: "A+" },
+        { name: "Strength", value: "A+" },
+        { name: "Agility", value: "A+" },
+        { name: "Intellect", value: "Z+" },
+        { name: "Stamina", value: "A" },
+        { name: "Health", value: "S" },
         { name: "HAX", value: "S+" },
       ],
     },
     {
-      title: 'AWOKEN: "Calamitos"',
+      title: 'AWOKEN: <br> "Calamitos"',
       description: "The embodiment of catastrophe and might.",
       imageUrl: "img/awk/GENA_AWAKE.png",
       stats: [
         { name: "Strength", value: "A+" },
         { name: "Agility", value: "A" },
-        { name: "Intellect", value: "A+" },
-        { name: "Stamina", value: "C" },
-        { name: "Health", value: "S+" },
-        { name: "HAX", value: "A+" },
-      ],
-    },
-    {
-      title: 'AWOKEN: "FACELESS"',
-      description: "The soulless one now wields greater power...",
-      imageUrl: "img/awk/fal.jpg",
-      stats: [
-        { name: "Strength", value: "B" },
-        { name: "Agility", value: "S+" },
-        { name: "Intellect", value: "C" },
+        { name: "Intellect", value: "X" },
         { name: "Stamina", value: "S" },
-        { name: "Health", value: "B" },
-        { name: "HAX", value: "A+" },
+        { name: "Health", value: "Z+" },
+        { name: "HAX", value: "Z+" },
       ],
     },
     {
-      title: 'AWOKEN: "D.O.G"',
+      title: 'AWOKEN: <br> "FACELESS"',
+      description: "The soulless one now wields greater power...",
+      imageUrl: "img/awk/faL.jpg",
+      stats: [
+        { name: "Strength", value: "A" },
+        { name: "Agility", value: "SS" },
+        { name: "Intellect", value: "A+" },
+        { name: "Stamina", value: "Z" },
+        { name: "Health", value: "S" },
+        { name: "HAX", value: "SSS" },
+      ],
+    },
+    {
+      title: 'AWOKEN: <br> "D.O.G"',
       description: "A divine beast awakened to its true potential.",
       imageUrl: "img/awk/DOG_AWAKE.png",
       stats: [
-        { name: "Strength", value: "S+" },
-        { name: "Agility", value: "C" },
-        { name: "Intellect", value: "A+" },
-        { name: "Stamina", value: "F" },
-        { name: "Health", value: "S+" },
+        { name: "Strength", value: "Z+" },
+        { name: "Agility", value: "S" },
+        { name: "Intellect", value: "F" },
+        { name: "Stamina", value: "Z+" },
+        { name: "Health", value: "Z+" },
         { name: "HAX", value: "S" },
       ],
     },
@@ -361,36 +367,36 @@ document.addEventListener("DOMContentLoaded", () => {
       description: "The divine heir radiates power.",
       imageUrl: "img/awk/elder.jpg",
       stats: [
-        { name: "Strength", value: "B" },
-        { name: "Agility", value: "B+" },
-        { name: "Intellect", value: "B+" },
-        { name: "Stamina", value: "B" },
-        { name: "Health", value: "B" },
-        { name: "HAX", value: "A+" },
+        { name: "Strength", value: "SS" },
+        { name: "Agility", value: "SS" },
+        { name: "Intellect", value: "SS" },
+        { name: "Stamina", value: "SS" },
+        { name: "Health", value: "SS" },
+        { name: "HAX", value: "Z+" },
       ],
     },
     {
       title: 'AWOKEN: <br> "OLDEST CAT"',
       description: "The ancient one awakens with limitless wisdom and power.",
-      imageUrl: "img/objects/OldCat_awoken.webp",
+      imageUrl: "img/awk/oldcat.jpg",
       stats: [
-        { name: "Strength", value: "F" },
-        { name: "Agility", value: "F" },
+        { name: "Strength", value: "S" },
+        { name: "Agility", value: "S" },
         { name: "Intellect", value: "X" },
-        { name: "Stamina", value: "F" },
-        { name: "Health", value: "F" },
+        { name: "Stamina", value: "S" },
+        { name: "Health", value: "S" },
         { name: "HAX", value: "X" },
       ],
     },
     {
       title: 'AWOKEN: <br> "The Beast"',
       description: "The ultimate predator of the Apocalypse.",
-      imageUrl: "img/objects/Funtik_awoken.webp",
+      imageUrl: "img/awk/cerber.jpg",
       stats: [
-        { name: "Strength", value: "B+" },
-        { name: "Agility", value: "B+" },
-        { name: "Intellect", value: "B" },
-        { name: "Stamina", value: "A" },
+        { name: "Strength", value: "S+" },
+        { name: "Agility", value: "SS" },
+        { name: "Intellect", value: "A" },
+        { name: "Stamina", value: "S" },
         { name: "Health", value: "C" },
         { name: "HAX", value: "A" },
       ],
@@ -400,11 +406,11 @@ document.addEventListener("DOMContentLoaded", () => {
       description: "The charming face now hides a powerful spirit.",
       imageUrl: "img/awk/mask.jpg",
       stats: [
-        { name: "Strength", value: "B" },
-        { name: "Agility", value: "C" },
+        { name: "Strength", value: "SSS" },
+        { name: "Agility", value: "SSS" },
         { name: "Intellect", value: "A" },
-        { name: "Stamina", value: "B" },
-        { name: "Health", value: "C" },
+        { name: "Stamina", value: "S" },
+        { name: "Health", value: "A" },
         { name: "HAX", value: "B+" },
       ],
     },
@@ -451,13 +457,22 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(`${item.title} : ${totalPower}`);
 
       let calculatedRank = "F";
-      if (totalPower > 110) calculatedRank = "X";
-      else if (totalPower > 90) calculatedRank = "S+";
-      else if (totalPower > 80) calculatedRank = "S";
+      if (totalPower > 280) calculatedRank = "Z+"; // For D.O.G and Calamitos
+      else if (totalPower > 250) calculatedRank = "Z"; // For LEGION
+      else if (totalPower > 230) calculatedRank = "X+"; // For THE ELDER
+      else if (totalPower > 200) calculatedRank = "X"; // For FACELESS
+      else if (totalPower > 180)
+        calculatedRank = "SSS"; // For PUG MAN, LISTENER, etc.
+      else if (totalPower > 150) calculatedRank = "SS+"; // For THE DOLL
+      else if (totalPower > 120) calculatedRank = "SS"; // For The Beast
+      else if (totalPower > 100) calculatedRank = "S+";
+      else if (totalPower > 85) calculatedRank = "S";
       else if (totalPower > 70) calculatedRank = "A+";
       else if (totalPower > 60) calculatedRank = "A";
-      else if (totalPower > 50) calculatedRank = "B";
-      else if (totalPower > 40) calculatedRank = "C";
+      else if (totalPower > 50) calculatedRank = "B+";
+      else if (totalPower > 40) calculatedRank = "B";
+      else if (totalPower > 30) calculatedRank = "C+";
+      else if (totalPower > 20) calculatedRank = "C";
       item.rank = calculatedRank;
 
       // --- Создание HTML элемента ---
